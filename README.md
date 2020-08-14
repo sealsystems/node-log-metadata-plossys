@@ -6,13 +6,13 @@ Generates metadata for log messages in PLOSSYS 5
 
 This module creates an object with metadata required to associate a log message with a print job or printer. Additional attributes may also be added to this metadata.  
 
-First, install the module:
+First, install the log module and this one:
 
 ```sh
-npm install @sealsystems/log-metadata-plossys
+npm install @sealsystems/log @sealsystems/log-metadata-plossys
 ```
 
-Require the log module and this one:
+Require both modules:
 
 ```javascript
 const log = require('@sealsystems/log').getLogger();
