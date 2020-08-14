@@ -24,7 +24,6 @@ Now you can generate appropriate metadata:
 ```javascript
 const processJob = function(job) {
   const metadata = logMetadata(job)({ additionalAttribute: true });
-
   //  -> {<Necessary attributes from job>, additionalAttribute: true }
   
   log.info('Processing job.', metadata);
@@ -49,21 +48,17 @@ An error will be thrown if you do not use a job object for creating the `inject`
 
 ```javascript
 const inject = logMetadata({ /* This object does not contain the necessary attributes */ });
-
 // -> throws error
-}
 ```
 
 Overwriting one of the attributes necessary for associating the log message to a job or printer results in a warning log message. Also, the added attribute will be prefixed with `additional_`:
 
 ```javascript
-  const inject = logMetadata(job);
-  
-  log.info('Foo', inject({ uuid: 'bar' }));
+const inject = logMetadata(job);
 
-  // -> Log message: { level: 'warn', message: 'Attempting to overwrite necessary log metadata.', metadata: { additionalAttributes: ['uuid'] } }
-
-  // -> Resulting metadata object: { <Necessary attributes from job>, additional_uuid: 'bar' }
+log.info('Foo', inject({ uuid: 'bar' }));
+// -> Log message: { level: 'warn', message: 'Attempting to overwrite necessary log metadata.', metadata: { additionalAttributes: ['uuid'] } }
+// -> Resulting metadata object: { <Necessary attributes from job>, additional_uuid: 'bar' }
 ```
 
 Please note: In order to keep the system running despite the programming error, we do not throw an error in this case.
