@@ -30,7 +30,7 @@ const processJob = function(job) {
 }
 ```
 
-To streamline code containing multiple log messages, you can reuse the function which injects the necessary metadata:
+To streamline code containing multiple log messages, reuse the function which injects the necessary metadata:
 
 ```javascript
 const processJob = function(job) {
