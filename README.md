@@ -51,7 +51,7 @@ const inject = logMetadata({ /* This object does not contain the necessary attri
 // -> Throws error
 ```
 
-Overwriting any of the attributes necessary for associating the log message to a job or printer results in a warning log message. Also, the added attribute will be prefixed with `additional_`:
+Overwriting any of the attributes necessary for associating the log message to a job or printer results in a warning log message. Also, the corresponding attributes will be prefixed with `additional_`:
 
 ```javascript
 log.info('Foo', inject({ uuid: 'bar' }));
