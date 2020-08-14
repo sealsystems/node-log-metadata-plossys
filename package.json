@@ -1,0 +1,57 @@
+{
+  "name": "@sealsystems/log-metadata-plossys",
+  "version": "0.0.0",
+  "description": "Generates metadata for log messages in PLOSSYS 5",
+  "author": {
+    "name": "SEAL Systems AG",
+    "email": "support@sealsystems.de",
+    "url": "http://www.sealsystems.de"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "sealsystems/node-log-metadata-plossys"
+  },
+  "main": "lib",
+  "seal": {
+    "service": {
+      "name": "node-log-metadata-plossys",
+      "tags": ""
+    },
+    "packaging": {
+      "firewallExceptions": [
+        {
+          "port": 443
+        }
+      ],
+      "msi": {
+        "upgradeCode": "6417b73e-d02a-48dc-9139-c2b9e7d5797a",
+        "firewallExceptionsGuid": "985108db-945f-4df0-a1c7-1a8589067f0b"
+      }
+    }
+  },
+  "scripts": {
+    "bot": "bot",
+    "licenses": "license-checker --production --csv",
+    "lint": "lint",
+    "lint:fix": "lint-fix",
+    "release": "release",
+    "test": "test-run",
+    "test:coverage": "test-coverage",
+    "test:coverage:check": "test-coverage-check",
+    "test:report": "test-report"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "release": {
+    "extends": "@sealsystems/semantic-release/node-module"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@sealsystems/eslint-config-es": "3.6.3",
+    "@sealsystems/mocha": "4.1.4",
+    "@sealsystems/semantic-release": "4.3.0"
+  }
+}
