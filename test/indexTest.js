@@ -2,11 +2,13 @@
 
 const assert = require('assertthat');
 
+const log = require('@sealsystems/log').getLogger();
+const logMetadata = require('../lib');
+
 const index = require('../lib');
 
 suite('index', () => {
   const job = {
-    _id: '48727e72-20e8-446b-b0fd-9a00f212a07c',
     orig: {
       sourceHost: 'archlinux',
       userName: 'tol',
@@ -19,7 +21,7 @@ suite('index', () => {
       arrivedTime: 1608280547291.0,
       checkinTime: 1608280547459.0,
       fileSize: 1062429,
-      copies: 1,
+      copies: 1
     },
     current: {
       sourceHost: 'archlinux',
@@ -34,7 +36,7 @@ suite('index', () => {
       checkinTime: 1608280547459.0,
       fileSize: 1062429,
       copies: 1,
-      fileFormat: 'application/postscript',
+      fileFormat: 'application/postscript'
     },
     status: 'job-waitprocessing',
     fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
@@ -45,16 +47,16 @@ suite('index', () => {
         createdBy: 'checkin',
         createdAt: 1608280547460.0,
         context: {
-          type: 'lpr',
-        },
+          type: 'lpr'
+        }
       },
       {
         fileName: '799e3cb6-e58e-4048-a882-5b0c7a0b869f',
         mimeType: 'application/postscript',
         createdBy: 'convert-pdf2ps',
         createdAt: 1608280548491.0,
-        context: {},
-      },
+        context: {}
+      }
     ],
     refId: '48727e72',
     lcCurrent: {
@@ -70,54 +72,50 @@ suite('index', () => {
       checkinTime: 1608280547459.0,
       fileSize: 1062429,
       copies: 1,
-      fileFormat: 'application/pdf',
-    },
+      fileFormat: 'application/pdf'
+    }
   };
 
   const printer = {
-    _id: 'printer1',
+    _id: 'printer9000',
     config: {
-      printer: 'printer1',
-      connection: 'socket://printers:9100',
-      server: 'spooler1',
+      printer: 'printer9000',
+      connection: 'socket://printers:9000',
+      nativeQueue: true,
+      server: '17d2595f917a',
       webUrl: 'http://printers',
-      type: {
-        name: 'printer1',
-        manufacturer: 'Netcat',
-        model: 'Henry',
-        pdl: {
-          name: 'postscript',
-          version: '3',
-        },
-      },
-      connectionHostname: 'printers',
+      connectionHostname: 'printers'
     },
     runtime: {
-      status: 'printer-idle',
+      status: 'idle',
       currentPrintingJob: '',
       lastPrintedJobTime: 0,
-      queuedJobs: 0,
-    },
+      queuedJobs: 0
+    }
   };
 
-  const metadata = {
+  const meta = {
     status: 'status from metadata',
     random: 12,
     'random float': 51.138,
     bool: false,
     date: '1993-08-13',
-    regEx: 'helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo to you',
     enum: 'online',
     firstname: 'Lauryn',
     lastname: 'Fredi',
     city: 'Santa Cruz de Tenerife',
-    country: 'Ethiopia',
     countryCode: 'LI',
     'email uses current data': 'Lauryn.Fredi@gmail.com',
-    'email from expression': 'Lauryn.Fredi@yopmail.com',
+    'email from expression': 'Lauryn.Fredi@yopmail.com'
   };
 
   test('is an object.', async () => {
     assert.that(index).is.ofType('object');
+  });
+  test.only('logs something', async () => {
+    log.info('>>>>>>tralalalal', logMetadata({ ...meta, job, printer }));
+    log.info('>>>>>>tralalalal', logMetadata({ job: { _id: '58309587039583' } }));
+    log.info('>>>>>>normal logging', { ...meta, job, printer });
+    log.info('>>>>>>normal logging nr 2', job);
   });
 });
