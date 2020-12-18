@@ -109,10 +109,7 @@ suite('index', () => {
     'email from expression': 'Lauryn.Fredi@yopmail.com'
   };
 
-  test('is an object.', async () => {
-    assert.that(index).is.ofType('object');
-  });
-  test.only('logs something', async () => {
+  test('logs something', async () => {
     log.info('>>>>>>tralalalal', logMetadata({ ...meta, job, printer }));
     log.info('>>>>>>tralalalal', logMetadata({ job: { _id: '58309587039583' } }));
     log.info('>>>>>>normal logging', { ...meta, job, printer });
