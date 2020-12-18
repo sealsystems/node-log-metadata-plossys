@@ -3,9 +3,7 @@
 const assert = require('assertthat');
 
 const log = require('@sealsystems/log').getLogger();
-const logMetadata = require('../lib');
-
-const index = require('../lib');
+const filterPlossys = require('../lib/filterPlossys');
 
 suite('index', () => {
   const job = {
@@ -110,9 +108,33 @@ suite('index', () => {
   };
 
   test('logs something', async () => {
-    log.info('>>>>>>tralalalal', logMetadata({ ...meta, job, printer }));
-    log.info('>>>>>>tralalalal', logMetadata({ job: { _id: '58309587039583' } }));
+    log.info('>>>>>>tralalalal', filterPlossys({ ...meta, job, printer }));
+    log.info('>>>>>>tralalalal', filterPlossys({ job: { _id: '58309587039583' } }));
     log.info('>>>>>>normal logging', { ...meta, job, printer });
     log.info('>>>>>>normal logging nr 2', job);
+  });
+
+  test('logs normaly', async () => {
+    log.info('message', job);
+  });
+
+  test('logs with incomplete job object', async () => {
+    log.info('message', filterPlossys({ job: { _id: 'id-123' } }));
+  });
+
+  test('logs with incomplete printer object', async () => {
+    log.info('message', filterPlossys({ printer: { config: { connection: 'https://nowhere.net' } } }));
+  });
+
+  test('logs with complete job object', async () => {
+    log.info('message', filterPlossys({ job }));
+  });
+
+  test('logs with complete printer object', async () => {
+    log.info('message', filterPlossys({ printer }));
+  });
+
+  test('logs with complete job and printer object', async () => {
+    log.info('message', filterPlossys({ job, printer }));
   });
 });
