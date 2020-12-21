@@ -2,7 +2,6 @@
 
 const assert = require('assertthat');
 
-const log = require('@sealsystems/log').getLogger();
 const filterPlossys = require('../lib/filterPlossys');
 
 const mockJob = {
@@ -106,43 +105,132 @@ const mockMeta = {
   'email from expression': 'Lauryn.Fredi@yopmail.com'
 };
 
-const log2 = {
+const mockLock = {
   info: (message, metadata) => {
-    const logData = {
+    return {
       message,
       metadata
     };
-    console.log(logData);
-    return logData;
   }
 };
 
 suite('index', () => {
   test('logs without filter', async () => {
-    log2.info('message', mockJob);
+    const logging = mockLock.info('message', mockJob);
+    assert.that(logging).is.sameJsonAs({ message: 'message', metadata: mockJob });
   });
 
-  test.only('logs with incomplete job object', async () => {
-    log2.info('message', filterPlossys({ job: { _id: 'id-123' } }));
+  test('logs with incomplete job object', async () => {
+    const logging = mockLock.info('message', filterPlossys({ job: { _id: 'id-123' } }));
+    assert.that(logging).is.sameJsonAs({
+      message: 'message',
+      metadata: {
+        job: {
+          _id: 'id-123',
+          fileName: undefined,
+          refId: undefined,
+          status: undefined
+        },
+        printer: {}
+      }
+    });
   });
 
   test('logs with incomplete printer object', async () => {
-    log.info('message', filterPlossys({ printer: { config: { connection: 'https://nowhere.net' } } }));
+    const logging = mockLock.info(
+      'message',
+      filterPlossys({ printer: { config: { connection: 'https://nowhere.net' } } })
+    );
+    assert.that(logging).is.sameJsonAs({
+      message: 'message',
+      metadata: {
+        job: {},
+        printer: {
+          _id: undefined,
+          printer: undefined,
+          connection: 'https://nowhere.net'
+        }
+      }
+    });
   });
 
   test('logs with complete job object', async () => {
-    log.info('message', filterPlossys({ job: mockJob }));
+    const logging = mockLock.info('message', filterPlossys({ job: mockJob }));
+    assert.that(logging).is.sameJsonAs({
+      message: 'message',
+      metadata: {
+        job: {
+          _id: undefined,
+          fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
+          refId: '48727e72',
+          status: 'job-waitprocessing',
+          jobName: '5Bgb',
+          printerName: 'printer1'
+        },
+        printer: {}
+      }
+    });
   });
 
   test('logs with complete printer object', async () => {
-    log.info('message', filterPlossys({ printer: mockPrinter }));
+    const logging = mockLock.info('message', filterPlossys({ printer: mockPrinter }));
+    assert.that(logging).is.sameJsonAs({
+      message: 'message',
+      metadata: {
+        job: {},
+        printer: {
+          _id: 'printer9000',
+          status: 'idle',
+          printer: 'printer9000',
+          connection: 'socket://printers:9000'
+        }
+      }
+    });
   });
 
   test('logs with complete job and printer object', async () => {
-    log.info('message', filterPlossys({ job: mockJob, printer: mockPrinter }));
+    const logging = mockLock.info('message', filterPlossys({ job: mockJob, printer: mockPrinter }));
+    assert.that(logging).is.sameJsonAs({
+      message: 'message',
+      metadata: {
+        job: {
+          _id: undefined,
+          fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
+          refId: '48727e72',
+          status: 'job-waitprocessing',
+          jobName: '5Bgb',
+          printerName: 'printer1'
+        },
+        printer: {
+          _id: 'printer9000',
+          status: 'idle',
+          printer: 'printer9000',
+          connection: 'socket://printers:9000'
+        }
+      }
+    });
   });
 
   test('logs with metadata, complete job and printer object', async () => {
-    log.info('message', filterPlossys({ ...mockMeta, job: mockJob, printer: mockPrinter }));
+    const logging = mockLock.info('message', filterPlossys({ ...mockMeta, job: mockJob, printer: mockPrinter }));
+    assert.that(logging).is.sameJsonAs({
+      message: 'message',
+      metadata: {
+        job: {
+          _id: undefined,
+          fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
+          refId: '48727e72',
+          status: 'job-waitprocessing',
+          jobName: '5Bgb',
+          printerName: 'printer1'
+        },
+        printer: {
+          _id: 'printer9000',
+          status: 'idle',
+          printer: 'printer9000',
+          connection: 'socket://printers:9000'
+        }
+      }
+    });
   });
 });
