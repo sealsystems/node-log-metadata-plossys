@@ -1,6 +1,6 @@
 {
   "name": "@sealsystems/log-metadata-plossys",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Generates metadata for log messages in PLOSSYS 5",
   "author": {
     "name": "SEAL Systems AG",
