@@ -213,7 +213,7 @@ suite('index', () => {
   });
 
   test('logs with metadata, complete job and printer object', async () => {
-    const logging = mockLock.info('message', filterPlossys({ mockMeta, job: mockJob, printer: mockPrinter }));
+    const logging = mockLock.info('message', filterPlossys({ metadata: mockMeta, job: mockJob, printer: mockPrinter }));
     assert.that(logging).is.sameJsonAs({
       message: 'message',
       metadata: {
@@ -230,7 +230,19 @@ suite('index', () => {
           status: 'idle',
           printer: 'printer9000',
           connection: 'socket://printers:9000'
-        }
+        },
+        status: 'status from metadata',
+        random: 12,
+        'random float': 51.138,
+        bool: false,
+        date: '1993-08-13',
+        enum: 'online',
+        firstname: 'Lauryn',
+        lastname: 'Fredi',
+        city: 'Santa Cruz de Tenerife',
+        countryCode: 'LI',
+        'email uses current data': 'Lauryn.Fredi@gmail.com',
+        'email from expression': 'Lauryn.Fredi@yopmail.com'
       }
     });
   });
