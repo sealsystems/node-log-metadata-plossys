@@ -49,7 +49,6 @@
     "extends": "@sealsystems/semantic-release/node-module"
   },
   "dependencies": {
-    "@sealsystems/log": "2.2.3"
   },
   "devDependencies": {
     "@sealsystems/eslint-config-es": "3.6.3",
