@@ -129,7 +129,7 @@ suite('index', () => {
         job: {
           _id: 'id-123',
           fileName: 'n/a',
-          refId: 'n/a',
+          uuid: 'n/a',
           status: 'n/a'
         },
         printer: {}
@@ -163,7 +163,7 @@ suite('index', () => {
         job: {
           _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
-          refId: '48727e72',
+          uuid: '48727e72',
           status: 'job-waitprocessing',
           jobName: '5Bgb',
           printerName: 'printer1'
@@ -197,7 +197,7 @@ suite('index', () => {
         job: {
           _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
-          refId: '48727e72',
+          uuid: '48727e72',
           status: 'job-waitprocessing',
           jobName: '5Bgb',
           printerName: 'printer1'
@@ -213,14 +213,14 @@ suite('index', () => {
   });
 
   test('logs with metadata, complete job and printer object', async () => {
-    const logging = mockLock.info('message', filterPlossys({ ...mockMeta, job: mockJob, printer: mockPrinter }));
+    const logging = mockLock.info('message', filterPlossys({ mockMeta, job: mockJob, printer: mockPrinter }));
     assert.that(logging).is.sameJsonAs({
       message: 'message',
       metadata: {
         job: {
           _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
-          refId: '48727e72',
+          uuid: '48727e72',
           status: 'job-waitprocessing',
           jobName: '5Bgb',
           printerName: 'printer1'
