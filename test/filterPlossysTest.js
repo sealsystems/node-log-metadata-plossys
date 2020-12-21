@@ -128,9 +128,9 @@ suite('index', () => {
       metadata: {
         job: {
           _id: 'id-123',
-          fileName: undefined,
-          refId: undefined,
-          status: undefined
+          fileName: 'n/a',
+          refId: 'n/a',
+          status: 'n/a'
         },
         printer: {}
       }
@@ -147,8 +147,8 @@ suite('index', () => {
       metadata: {
         job: {},
         printer: {
-          _id: undefined,
-          printer: undefined,
+          _id: 'n/a',
+          printer: 'n/a',
           connection: 'https://nowhere.net'
         }
       }
