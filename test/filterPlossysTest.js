@@ -5,6 +5,7 @@ const assert = require('assertthat');
 const filterPlossys = require('../lib/filterPlossys');
 
 const mockJob = {
+  _id: 'myJobId123',
   orig: {
     sourceHost: 'archlinux',
     userName: 'tol',
@@ -160,7 +161,7 @@ suite('index', () => {
       message: 'message',
       metadata: {
         job: {
-          _id: undefined,
+          _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
           refId: '48727e72',
           status: 'job-waitprocessing',
@@ -194,7 +195,7 @@ suite('index', () => {
       message: 'message',
       metadata: {
         job: {
-          _id: undefined,
+          _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
           refId: '48727e72',
           status: 'job-waitprocessing',
@@ -217,7 +218,7 @@ suite('index', () => {
       message: 'message',
       metadata: {
         job: {
-          _id: undefined,
+          _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
           refId: '48727e72',
           status: 'job-waitprocessing',
