@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const filterPlossys = require('../lib/filterPlossys');
+const createMetadata = require('../lib/createMetadata');
 
 const mockJob = {
   _id: 'myJobId123',
@@ -39,7 +39,7 @@ const mockJob = {
   fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
   stages: [
     {
-      fileName: '48727e72-20e8-446b-b0fd-9a00f212a07c',
+      fileName: 'refId042-20e8-446b-b0fd-9a00f212a07c',
       mimeType: 'application/pdf',
       createdBy: 'checkin',
       createdAt: 1608280547460.0,
@@ -55,7 +55,7 @@ const mockJob = {
       context: {}
     }
   ],
-  refId: '48727e72',
+  refId: 'refId042',
   lcCurrent: {
     sourceHost: 'archlinux',
     userName: 'tol',
@@ -122,14 +122,14 @@ suite('index', () => {
   });
 
   test('logs with incomplete job object', async () => {
-    const logging = mockLock.info('message', filterPlossys({ job: { _id: 'id-123' } }));
+    const logging = mockLock.info('message', createMetadata({ job: { _id: 'id-123' } }));
     assert.that(logging).is.sameJsonAs({
       message: 'message',
       metadata: {
         job: {
-          _id: 'id-123',
           fileName: 'n/a',
-          uuid: 'n/a',
+          jobId: 'n/a',
+          uuid: 'id-123',
           status: 'n/a'
         },
         printer: {}
@@ -140,7 +140,7 @@ suite('index', () => {
   test('logs with incomplete printer object', async () => {
     const logging = mockLock.info(
       'message',
-      filterPlossys({ printer: { config: { connection: 'https://nowhere.net' } } })
+      createMetadata({ printer: { config: { connection: 'https://nowhere.net' } } })
     );
     assert.that(logging).is.sameJsonAs({
       message: 'message',
@@ -156,14 +156,14 @@ suite('index', () => {
   });
 
   test('logs with complete job object', async () => {
-    const logging = mockLock.info('message', filterPlossys({ job: mockJob }));
+    const logging = mockLock.info('message', createMetadata({ job: mockJob }));
     assert.that(logging).is.sameJsonAs({
       message: 'message',
       metadata: {
         job: {
-          _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
-          uuid: '48727e72',
+          jobId: 'refId042',
+          uuid: 'myJobId123',
           status: 'job-waitprocessing',
           jobName: '5Bgb',
           printerName: 'printer1'
@@ -174,7 +174,7 @@ suite('index', () => {
   });
 
   test('logs with complete printer object', async () => {
-    const logging = mockLock.info('message', filterPlossys({ printer: mockPrinter }));
+    const logging = mockLock.info('message', createMetadata({ printer: mockPrinter }));
     assert.that(logging).is.sameJsonAs({
       message: 'message',
       metadata: {
@@ -190,14 +190,14 @@ suite('index', () => {
   });
 
   test('logs with complete job and printer object', async () => {
-    const logging = mockLock.info('message', filterPlossys({ job: mockJob, printer: mockPrinter }));
+    const logging = mockLock.info('message', createMetadata({ job: mockJob, printer: mockPrinter }));
     assert.that(logging).is.sameJsonAs({
       message: 'message',
       metadata: {
         job: {
-          _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
-          uuid: '48727e72',
+          jobId: 'refId042',
+          uuid: 'myJobId123',
           status: 'job-waitprocessing',
           jobName: '5Bgb',
           printerName: 'printer1'
@@ -213,14 +213,14 @@ suite('index', () => {
   });
 
   test('logs with metadata, complete job and printer object', async () => {
-    const logging = mockLock.info('message', filterPlossys({ metadata: mockMeta, job: mockJob, printer: mockPrinter }));
+    const logging = mockLock.info('message', createMetadata({ ...mockMeta, job: mockJob, printer: mockPrinter }));
     assert.that(logging).is.sameJsonAs({
       message: 'message',
       metadata: {
         job: {
-          _id: 'myJobId123',
           fileName: ['799e3cb6-e58e-4048-a882-5b0c7a0b869f'],
-          uuid: '48727e72',
+          jobId: 'refId042',
+          uuid: 'myJobId123',
           status: 'job-waitprocessing',
           jobName: '5Bgb',
           printerName: 'printer1'
