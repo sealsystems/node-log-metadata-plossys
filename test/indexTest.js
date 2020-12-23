@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const createMetadata = require('../lib/createMetadata');
+const createMetadata = require('../lib');
 
 const mockJob = {
   _id: 'myJobId123',
