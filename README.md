@@ -22,41 +22,83 @@ const logMetadata = require('@sealsystems/log-metadata-plossys');
 Now you can generate appropriate metadata:
 
 ```javascript
-const processJob = function(job) {
-  const metadata = logMetadata(job)({ additionalAttribute: true });
-  // -> {<Necessary attributes from job>, additionalAttribute: true }
-  
-  log.info('Processing job.', metadata);
+const processJob = function(myJob, myPrinter) {
+  log.info('Processing job.', logMetadata({ 
+    job: myJob, 
+    printer: myPrinter 
+  }));
 }
 ```
 
-To streamline code containing multiple log messages, reuse the function which injects the necessary metadata:
+## Filters on job and printer object
+
+Calling `logMetadata()` with job and printer objects filters for the most important attributes. 
+
+### job returns with
+
+- _id
+- fileName
+- refId (mapped to uuid)
+- status
+- jobName
+- printerName
+
+### printer returns with
+
+- _id
+- status
+- printer
+- connection
+
+If you need additional metadata beside job and printer you may add a generic metadata object:
 
 ```javascript
-const processJob = function(job) {
-  const inject = logMetadata(job);
-  
-  log.info('Start processing job.', inject({ additionalAttribute: true }));
-
-  // ...
-
-  log.info('End processing job.', inject({ additionalAttribute: false, anotherAttribute: 'foo' }));
+const processJob = function(genericMetadata, myJob, myPrinter) {
+  log.info('Processing job.', logMetadata({
+    metadata: genericMetadata, 
+    job: myJob, 
+    printer: myPrinter
+  }))
 }
 ```
 
-An error will be thrown if you do not use a job object for creating the `inject` function:
+If you are missing some attributes while logging, you can still use `logMetadata()`.
 
 ```javascript
-const inject = logMetadata({ /* This object does not contain the necessary attributes */ });
-// -> Throws error
+const doStuff = function(jobId){
+  log.info('My message.', logMetadata({
+    job: {_id: jobId, status: 'waitprocessing'},
+    printer: {printerName: 'myPrinter43'}
+  }))
+}
 ```
 
-Overwriting any of the attributes necessary for associating the log message to a job or printer results in a warning log message. Also, the corresponding attributes will be prefixed with `additional_`:
+The output will look like this:
 
-```javascript
-log.info('Foo', inject({ uuid: 'bar' }));
-// -> Log message: { level: 'warn', message: 'Attempting to overwrite necessary log metadata with additional attributes.', metadata: { additionalAttributes: ['uuid'] } }
-// -> Resulting metadata object: { <Necessary attributes from job>, additional_uuid: 'bar' }
+```json
+{
+  message: 'My message.',
+  metadata: {
+    job: {
+      _id: 'myJobId123',
+      fileName: 'n/a',
+      uuid: 'n/a',
+      status: 'job-waitprocessing',
+      jobName: 'n/a',
+      printerName: 'n/a'
+    },
+    printer: {
+      _id: 'n/a',
+      status: 'n/a',
+      printer: 'myPrinter43',
+      connection: 'n/a'
+    },
+
+  }
+}
 ```
 
-Please note: In order to keep the system running despite the programming error, we do not throw an error in this case.
+If a property is missing, it will be replaced with `'n/a'`
+
+**NOTE:** while using `logMetadata()` the job and printer attribute are nested within the default `metadata` object.
+This prevents overwriting of specific attributes like `_id` and `status`.
