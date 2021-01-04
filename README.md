@@ -4,7 +4,7 @@ Generates metadata for log messages in PLOSSYS 5
 
 ## Introduction
 
-This module creates an object with metadata required to associate a log message with a print job or printer. Additional attributes may also be added to this metadata.  
+This module creates an object with metadata required to associate a log message with a print job or printer. Additional attributes may also be added to this metadata.
 
 First, install the log module and this one:
 
@@ -15,48 +15,17 @@ npm install @sealsystems/log @sealsystems/log-metadata-plossys
 Require both modules:
 
 ```javascript
-const log = require('@sealsystems/log').getLogger();
-const logMetadata = require('@sealsystems/log-metadata-plossys');
+const log = require('@sealsystems/log-metadata-plossys')(require('@sealsystems/log').getLogger());
 ```
 
-Now you can generate appropriate metadata:
+Now you can use the `log` object as usual, but `job` and `printer will be reduced. [see lib/decorate.js](lib/decorate.js)
 
 ```javascript
-const processJob = function(job) {
-  const metadata = logMetadata(job)({ additionalAttribute: true });
-  // -> {<Necessary attributes from job>, additionalAttribute: true }
-  
-  log.info('Processing job.', metadata);
-}
+const processJob = function(myJob, myPrinter) {
+  log.info('Processing job.', {
+    job: myJob,
+    printer: myPrinter,
+    any: 'additionalAttribute'
+  });
+};
 ```
-
-To streamline code containing multiple log messages, reuse the function which injects the necessary metadata:
-
-```javascript
-const processJob = function(job) {
-  const inject = logMetadata(job);
-  
-  log.info('Start processing job.', inject({ additionalAttribute: true }));
-
-  // ...
-
-  log.info('End processing job.', inject({ additionalAttribute: false, anotherAttribute: 'foo' }));
-}
-```
-
-An error will be thrown if you do not use a job object for creating the `inject` function:
-
-```javascript
-const inject = logMetadata({ /* This object does not contain the necessary attributes */ });
-// -> Throws error
-```
-
-Overwriting any of the attributes necessary for associating the log message to a job or printer results in a warning log message. Also, the corresponding attributes will be prefixed with `additional_`:
-
-```javascript
-log.info('Foo', inject({ uuid: 'bar' }));
-// -> Log message: { level: 'warn', message: 'Attempting to overwrite necessary log metadata with additional attributes.', metadata: { additionalAttributes: ['uuid'] } }
-// -> Resulting metadata object: { <Necessary attributes from job>, additional_uuid: 'bar' }
-```
-
-Please note: In order to keep the system running despite the programming error, we do not throw an error in this case.
