@@ -1,6 +1,6 @@
 {
   "name": "@sealsystems/log-metadata-plossys",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "description": "Generates metadata for log messages in PLOSSYS 5",
   "author": {
     "name": "SEAL Systems AG",
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "sealsystems/node-log-metadata-plossys"
+    "url": "https://github.com/sealsystems/node-log-metadata-plossys"
   },
   "main": "lib",
   "seal": {
@@ -50,8 +50,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@sealsystems/eslint-config-es": "3.6.2",
-    "@sealsystems/mocha": "4.1.3",
-    "@sealsystems/semantic-release": "4.3.1"
+    "@sealsystems/eslint-config-es": "3.6.5",
+    "@sealsystems/mocha": "4.1.7",
+    "@sealsystems/semantic-release": "4.3.2"
   }
 }
