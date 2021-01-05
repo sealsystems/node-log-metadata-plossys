@@ -44,9 +44,9 @@ const processJob = function(myJob, myPrinter) {
 
 ```diff
 log.info('...', {
-  -uuid: job._id,
-  -jobId: job.refId
-  +job
+-  uuid: job._id,
+-  jobId: job.refId
++  job
 });
 ```
 
@@ -54,7 +54,7 @@ log.info('...', {
 
 ```diff
 log.info('...', {
-  -printer: printer._id
-  +printer
+-  printer: printer._id
++  printer
 });
 ```
