@@ -26,12 +26,8 @@ suite('/lib/decorate', () => {
     });
 
     const expected = {
-      job: {
-        uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
-        jobId: 'xxxxxxxx',
-        status: 'waitprocessing',
-        printer: 'Printer42'
-      },
+      uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+      jobId: 'xxxxxxxx',
       noPrinter: true,
       foo: 'bar',
       foobar: 42
@@ -53,20 +49,14 @@ suite('/lib/decorate', () => {
           status: 'idle'
         }
       },
-      noPrinter: true,
+      noJob: true,
       foo: 'bar',
       foobar: 42
     });
 
     const expected = {
-      printer: {
-        printer: 'printer42',
-        printerName: 'Printer42',
-        connection: 'socket://localhost:9100',
-        nativeQueue: true,
-        status: 'idle'
-      },
-      noPrinter: true,
+      printer: 'printer42',
+      noJob: true,
       foo: 'bar',
       foobar: 42
     };
@@ -98,19 +88,9 @@ suite('/lib/decorate', () => {
     });
 
     const expected = {
-      job: {
-        uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
-        jobId: 'xxxxxxxx',
-        status: 'waitprocessing',
-        printer: 'Printer42'
-      },
-      printer: {
-        printer: 'printer42',
-        printerName: 'Printer42',
-        connection: 'socket://localhost:9100',
-        nativeQueue: true,
-        status: 'idle'
-      },
+      uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+      jobId: 'xxxxxxxx',
+      printer: 'printer42',
       foo: 'bar',
       foobar: 42
     };
