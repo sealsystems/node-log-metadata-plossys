@@ -28,4 +28,33 @@ const processJob = function(myJob, myPrinter) {
     any: 'additionalAttribute'
   });
 };
+
+// metadata output
+// {
+//   uuid: 'xxxxx-yyyy-xxx-aaa-bbb',
+//   jobId: 'xxxxx',
+//   printer: 'printer1',
+//   any: 'additionalAttribute'
+// }
+```
+
+## Refactoring recipes
+
+### job
+
+```diff
+log.info('...', {
+  -uuid: job._id,
+  -jobId: job.refId
+  +job
+});
+```
+
+### printer
+
+```diff
+log.info('...', {
+  -printer: printer._id
+  +printer
+});
 ```
