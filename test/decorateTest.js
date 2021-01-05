@@ -117,4 +117,22 @@ suite('/lib/decorate', () => {
 
     assert.that(acutal).is.sameJsonAs(expected);
   });
+
+  test('passes through printer and job attributes if they are not in expected format', () => {
+    assert
+      .that(
+        decorate({
+          job: 'not a valid job properties object',
+          printer: 1234,
+          foo: 'bar',
+          foobar: 42
+        })
+      )
+      .is.sameJsonAs({
+        job: 'not a valid job properties object',
+        printer: 1234,
+        foo: 'bar',
+        foobar: 42
+      });
+  });
 });
