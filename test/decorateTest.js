@@ -134,4 +134,20 @@ suite('/lib/decorate', () => {
 
     assert.that(acutal).is.sameJsonAs(expected);
   });
+
+  test('sets printer to lowercase ', () => {
+    const acutal = decorate({
+      printer: 'This IS PRiNTeR nAME',
+      foo: 'bar',
+      foobar: 42
+    });
+
+    const expected = {
+      printer: 'this is printer name',
+      foo: 'bar',
+      foobar: 42
+    };
+
+    assert.that(acutal).is.sameJsonAs(expected);
+  });
 });

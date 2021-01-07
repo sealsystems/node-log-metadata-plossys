@@ -67,3 +67,10 @@ log.info('...', {
 +  printer
 });
 ```
+
+```diff
+log.info('...', {
+-  printer: job.current.printerName.toLowerCase()
++  printer: job.current.printerName
+});
+```
