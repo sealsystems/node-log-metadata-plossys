@@ -18,7 +18,7 @@ Require both modules:
 const log = require('@sealsystems/log-metadata-plossys')(require('@sealsystems/log').getLogger());
 ```
 
-Now you can use the `log` object as usual, but `job` and `printer` will be reduced. [see lib/decorate.js](lib/decorate.js)
+Now you can use the `log` object as usual, but `job` and `printer` will be reduced. [see lib/inspect.js](lib/inspect.js)
 
 ```javascript
 const processJob = function(myJob, myPrinter) {
