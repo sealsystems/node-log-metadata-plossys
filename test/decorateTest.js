@@ -115,4 +115,23 @@ suite('/lib/decorate', () => {
         foobar: 42
       });
   });
+
+  test('sets jobId even if only uuid available', () => {
+    const acutal = decorate({
+      uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+      noPrinter: true,
+      foo: 'bar',
+      foobar: 42
+    });
+
+    const expected = {
+      uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+      jobId: 'xxxxxxxx',
+      noPrinter: true,
+      foo: 'bar',
+      foobar: 42
+    };
+
+    assert.that(acutal).is.sameJsonAs(expected);
+  });
 });

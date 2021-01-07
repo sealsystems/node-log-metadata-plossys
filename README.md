@@ -38,7 +38,7 @@ const processJob = function(myJob, myPrinter) {
 // }
 ```
 
-## Refactoring recipes
+## Recipes
 
 ### job
 
@@ -47,6 +47,15 @@ log.info('...', {
 -  uuid: job._id,
 -  jobId: job.refId
 +  job
+});
+```
+
+```diff
+const id = '80bf257d-f657-4592-9c03-856e2dc68655'; // in some cases you might not have/need the entire job object just in uuid
+
+log.info('...', {
+   uuid: id,
+-  jobId: id.substr(0,8)
 });
 ```
 
