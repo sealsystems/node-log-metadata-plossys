@@ -1,3 +1,10 @@
+## 1.1.0 (2021-01-08)
+
+### Features
+
+
+add metadata inspector ([bcc4596](https://github.com/sealsystems/node-log-metadata-plossys/commit/bcc4596))
+
 ## 1.0.1 (2020-12-26)
 
 ### Chores
