@@ -35,7 +35,7 @@ suite('/lib/inspect', () => {
       job: {
         _id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
         refId: 'xxxxxxxx',
-        lcCurrent: { printerName: 'Printer42' },
+        current: { printerName: 'Printer42' },
         status: 'waitprocessing'
       },
       noPrinter: true,
@@ -46,6 +46,7 @@ suite('/lib/inspect', () => {
     const expected = {
       uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
       jobId: 'xxxxxxxx',
+      printer: 'printer42',
       noPrinter: true,
       foo: 'bar',
       foobar: 42
@@ -87,7 +88,7 @@ suite('/lib/inspect', () => {
       job: {
         _id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
         refId: 'xxxxxxxx',
-        lcCurrent: { printerName: 'Printer42' },
+        current: { printerName: 'Printer42' },
         status: 'waitprocessing'
       },
       printer: {
