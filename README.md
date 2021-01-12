@@ -59,6 +59,15 @@ log.info('...', {
 });
 ```
 
+```diff
+log.info('...', {
+-  uuid: job._id,
+-  jobId: job.refId,
+-  printer: job.current.printerName
++  job
+});
+```
+
 ### printer
 
 ```diff
