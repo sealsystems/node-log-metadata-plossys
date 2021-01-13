@@ -1,3 +1,17 @@
+## 1.2.0 (2021-01-13)
+
+### Chores
+
+
+Update build configuration ([cdcc295](https://github.com/sealsystems/node-log-metadata-plossys/commit/cdcc295))
+
+Update build configuration ([57eb139](https://github.com/sealsystems/node-log-metadata-plossys/commit/57eb139))
+
+### Features
+
+
+add printer from job object as default ([5d5c26f](https://github.com/sealsystems/node-log-metadata-plossys/commit/5d5c26f))
+
 ## 1.1.0 (2021-01-08)
 
 ### Features
