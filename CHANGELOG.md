@@ -1,3 +1,10 @@
+## 1.2.1 (2021-01-16)
+
+### Chores
+
+
+Update build config ([56d92b6](https://github.com/sealsystems/node-log-metadata-plossys/commit/56d92b6))
+
 ## 1.2.0 (2021-01-13)
 
 ### Chores
