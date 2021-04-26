@@ -113,6 +113,21 @@ suite('/lib/inspect', () => {
       foo: 'bar',
       foobar: 42
     };
+    
+    const wish = {
+      job: {
+        _id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+        refId: 'xxxxxxxx',        
+        status: 'waitprocessing'
+      },
+      printer: {
+        _id: 'printer42',
+        connection: 'socket://localhost:9100',
+        status: 'idle'
+      },
+      foo: 'bar',
+      foobar: 42
+    }
 
     assert.that(acutal).is.sameJsonAs(expected);
   });
