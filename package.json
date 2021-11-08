@@ -49,7 +49,7 @@
     "extends": "@sealsystems/semantic-release/node-module"
   },
   "devDependencies": {
-    "@sealsystems/eslint-config-es": "3.6.8",
+    "@sealsystems/eslint-config-es": "3.7.0",
     "@sealsystems/log": "2.3.3",
     "@sealsystems/mocha": "4.1.11",
     "@sealsystems/semantic-release": "4.3.7"
