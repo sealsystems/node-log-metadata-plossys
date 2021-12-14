@@ -42,7 +42,6 @@
     "test:report": "test-report"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
   "release": {
@@ -51,7 +50,6 @@
   "devDependencies": {
     "@sealsystems/eslint-config-es": "3.7.0",
     "@sealsystems/log": "2.3.3",
-    "@sealsystems/mocha": "4.1.11",
-    "@sealsystems/semantic-release": "4.3.7"
+    "@sealsystems/mocha": "4.1.11"
   }
 }
