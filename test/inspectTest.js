@@ -55,6 +55,21 @@ suite('/lib/inspect', () => {
     assert.that(acutal).is.sameJsonAs(expected);
   });
 
+  test('inspects job key without refId', () => {
+    const acutal = inspect({
+      job: {
+        _id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc'
+      }
+    });
+
+    const expected = {
+      uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+      jobId: 'xxxxxxxx'
+    };
+
+    assert.that(acutal).is.sameJsonAs(expected);
+  });
+
   test('inspects printer key', () => {
     const acutal = inspect({
       printer: {
