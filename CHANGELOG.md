@@ -1,3 +1,10 @@
+## 1.3.0 (2022-09-08)
+
+### Features
+
+
+get jobId from _id ([9bd8951](https://github.com/sealsystems/node-log-metadata-plossys/commit/9bd8951))
+
 ## 1.2.1 (2021-01-16)
 
 ### Chores
