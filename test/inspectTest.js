@@ -31,7 +31,7 @@ suite('/lib/inspect', () => {
   });
 
   test('inspects job key', () => {
-    const acutal = inspect({
+    const actual = inspect({
       job: {
         _id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
         refId: 'xxxxxxxx',
@@ -52,11 +52,11 @@ suite('/lib/inspect', () => {
       foobar: 42
     };
 
-    assert.that(acutal).is.sameJsonAs(expected);
+    assert.that(actual).is.sameJsonAs(expected);
   });
 
   test('inspects job key without refId', () => {
-    const acutal = inspect({
+    const actual = inspect({
       job: {
         _id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc'
       }
@@ -67,11 +67,11 @@ suite('/lib/inspect', () => {
       jobId: 'xxxxxxxx'
     };
 
-    assert.that(acutal).is.sameJsonAs(expected);
+    assert.that(actual).is.sameJsonAs(expected);
   });
 
   test('inspects printer key', () => {
-    const acutal = inspect({
+    const actual = inspect({
       printer: {
         _id: 'printer42',
         config: {
@@ -95,11 +95,11 @@ suite('/lib/inspect', () => {
       foobar: 42
     };
 
-    assert.that(acutal).is.sameJsonAs(expected);
+    assert.that(actual).is.sameJsonAs(expected);
   });
 
   test('inspects job and printer keys', () => {
-    const acutal = inspect({
+    const actual = inspect({
       job: {
         _id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
         refId: 'xxxxxxxx',
@@ -129,11 +129,11 @@ suite('/lib/inspect', () => {
       foobar: 42
     };
 
-    assert.that(acutal).is.sameJsonAs(expected);
+    assert.that(actual).is.sameJsonAs(expected);
   });
 
   test('sets jobId even if only uuid available', () => {
-    const acutal = inspect({
+    const actual = inspect({
       uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
       noPrinter: true,
       foo: 'bar',
@@ -148,11 +148,11 @@ suite('/lib/inspect', () => {
       foobar: 42
     };
 
-    assert.that(acutal).is.sameJsonAs(expected);
+    assert.that(actual).is.sameJsonAs(expected);
   });
 
   test('sets printer to lowercase ', () => {
-    const acutal = inspect({
+    const actual = inspect({
       printer: 'This IS PRiNTeR nAME',
       foo: 'bar',
       foobar: 42
@@ -164,6 +164,6 @@ suite('/lib/inspect', () => {
       foobar: 42
     };
 
-    assert.that(acutal).is.sameJsonAs(expected);
+    assert.that(actual).is.sameJsonAs(expected);
   });
 });
