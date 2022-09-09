@@ -1,3 +1,10 @@
+## 1.3.1 (2022-09-09)
+
+### Bug Fixes
+
+
+do not error here on jobs without jobId ([cfe1f99](https://github.com/sealsystems/node-log-metadata-plossys/commit/cfe1f99))
+
 ## 1.3.0 (2022-09-08)
 
 ### Features
