@@ -1,3 +1,12 @@
+## 1.4.0 (2022-09-12)
+
+### Features
+
+
+if no _id is present, try id ([a83290f](https://github.com/sealsystems/node-log-metadata-plossys/commit/a83290f))
+
+some services only use the req.params in which the `jobId` is stored in the `id` key instead of the `_id` key as if you pull the data directly from mongo
+
 ## 1.3.1 (2022-09-09)
 
 ### Bug Fixes
