@@ -1,3 +1,10 @@
+## 1.5.0 (2023-08-25)
+
+### Features
+
+
+add current.userName to log if available ([1386ef0](https://github.com/sealsystems/node-log-metadata-plossys/commit/1386ef0))
+
 ## 1.4.0 (2022-09-12)
 
 ### Features
