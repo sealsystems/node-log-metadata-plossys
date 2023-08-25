@@ -85,6 +85,23 @@ suite('/lib/inspect', () => {
     assert.that(actual).is.sameJsonAs(expected);
   });
 
+  test('inspects job key with user', () => {
+    const actual = inspect({
+      job: {
+        id: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+        current: { userName: 'user42' }
+      }
+    });
+
+    const expected = {
+      uuid: 'xxxxxxxx-yyyy-aaaa-bbbb-cccccccc',
+      jobId: 'xxxxxxxx',
+      userName: 'user42'
+    };
+
+    assert.that(actual).is.sameJsonAs(expected);
+  });
+
   test('inspects printer key', () => {
     const actual = inspect({
       printer: {
