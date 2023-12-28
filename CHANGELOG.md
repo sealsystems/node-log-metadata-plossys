@@ -1,3 +1,10 @@
+## 1.5.1 (2023-12-28)
+
+### Chores
+
+
+Update update-build-config.yml ([03c7a9e](https://github.com/sealsystems/node-log-metadata-plossys/commit/03c7a9e))
+
 ## 1.5.0 (2023-08-25)
 
 ### Features
